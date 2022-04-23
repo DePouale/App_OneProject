@@ -1,6 +1,8 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def index(request):
-    return render (request, "landing/index.html")
+    return render(request, "landing/index.html")
+
+def catalog(request):
+    return render(request, "landing/catalog.html")
