@@ -76,3 +76,41 @@ class ProductPhoto(models.Model):
 
     def __str__(self):
         return f'{self.id}   {self.product_id}'
+
+class Cart(models.Model):
+
+    customer_id = models.ForeignKey(
+        Customer, 
+        on_delete=models.SET_DEFAULT,
+        default=0
+        )
+    products = models.ManyToManyField(
+        Product, 
+        blank=True, 
+        through='Cart_product'
+        )
+    created = models.DateTimeField(auto_now_add=True, auto_now=False)
+    update = models.DateTimeField(auto_now_add=False, auto_now=True)
+
+    class Meta:
+        verbose_name = ("Корзина")
+        verbose_name_plural = ('Корзина')
+
+    def __str__(self):
+        return f'{self.id}   {self.customer_id}'
+
+class Cart_product(models.Model):
+
+    cart = models.ForeignKey(
+        Cart, 
+        on_delete=models.CASCADE
+        )
+    product = models.ForeignKey(
+        Product, 
+        on_delete=models.CASCADE
+        )
+    quantity = models.SmallIntegerField(default=1)
+
+    class Meta:
+        verbose_name = ("Товар в Корзину")
+        verbose_name_plural = ('Товар в Корзине')
