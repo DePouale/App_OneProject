@@ -1,0 +1,14 @@
+{% extends 'main/category.html' %}
+
+{% block content %}
+    <h2>Улун</h2>
+    <p>{{ Category }}</p>
+    {% for el in category%}
+        {% if el == Улун %}
+            <div class="'alert alert-warning mt-2">
+                <p>{{ el.name }}</p>
+                
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
